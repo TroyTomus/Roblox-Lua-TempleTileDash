@@ -1,0 +1,14 @@
+--working, but was copied and merged to countdown script
+--[[
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local remoteEvent = ReplicatedStorage:WaitForChild("RemoteEventTest")
+
+local secondsRemaining = 5
+
+-- Fire the remote event every second until time expires
+for t = secondsRemaining, 1, -1 do
+	remoteEvent:FireAllClients(t)
+	wait(1)
+end
+]]--

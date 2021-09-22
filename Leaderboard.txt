@@ -1,0 +1,25 @@
+---------	
+---------
+---------
+--LEADERBOARD CREATION
+local Players = game:GetService("Players")
+
+local function leaderboardSetup(player)
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	leaderstats.Parent = player
+
+	local tiles = Instance.new("IntValue")
+	tiles.Name = "Tiles Scored"
+	tiles.Value = 0
+	tiles.Parent = leaderstats
+	
+end
+
+-- Connect the "leaderboardSetup()" function to the "PlayerAdded" event
+Players.PlayerAdded:Connect(leaderboardSetup)
+
+---------	
+---------
+---------
+
