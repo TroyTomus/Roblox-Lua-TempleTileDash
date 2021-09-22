@@ -9,7 +9,7 @@ Used:
 -Remote Events  
 -Event between client and server that pass data  
 -loops: "while" and "for"  
--Screen Gui
+-Screen Gui  
 -Surface Gui  
 -Team features  
 -leaderboard features  
