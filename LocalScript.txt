@@ -1,0 +1,58 @@
+------------------
+--EVENT Var
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+--local remoteEvent = ReplicatedStorage:WaitForChild("RemoteEventTest")
+----
+local remoteEventBLUEWON = ReplicatedStorage:WaitForChild("RemoteEventBlueWon")
+local remoteEventREDWON = ReplicatedStorage:WaitForChild("RemoteEventRedWon")
+local remoteEventDRAW = ReplicatedStorage:WaitForChild("RemoteEventDraw")
+------------------
+
+------------------
+--PlayerGUI Var
+local Player = game.Players.LocalPlayer 
+local var_BlueWinsGui = Player.PlayerGui: WaitForChild("BlueWinsGui")
+local var_RedWinsGui = Player.PlayerGui: WaitForChild("RedWinsGui")
+local var_DrawGui = Player.PlayerGui: WaitForChild("DrawWinsGui")
+------------------
+var_BlueWinsGui.Enabled = false --test
+var_RedWinsGui.Enabled = false --test
+var_DrawGui.Enabled = false
+------------------
+----testing/ turned off for updates --NOT USED
+--functions/ display the gui
+--[[--
+local function onTimerUpdate(seconds)
+	print(seconds.. "THIS MANY LEFT!!!!!!!!!!!!!!!!")
+	
+	if seconds==1 then		
+	end
+end--
+]]--
+------------------
+
+------------------
+--SHOW GUI
+local function BlueWonIt ()
+	var_BlueWinsGui.Enabled = true 
+	print("DOH!")	
+end
+--
+local function RedWonIt ()
+	var_RedWinsGui.Enabled = true 
+	print("yaba bada doo")	
+end
+--
+local function DRAW ()
+	var_DrawGui.Enabled = true
+	print("Don't have a cow, Man")	
+end
+------------------
+
+------------------
+-- Call "onTimerUpdate()" when the server fires the remote event
+--remoteEvent.OnClientEvent:Connect(onTimerUpdate)
+remoteEventREDWON.OnClientEvent:Connect(RedWonIt)
+remoteEventBLUEWON.OnClientEvent:Connect(BlueWonIt)
+remoteEventDRAW.OnClientEvent:Connect(DRAW)
+

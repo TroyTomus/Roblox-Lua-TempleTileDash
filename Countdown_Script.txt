@@ -1,0 +1,71 @@
+----from servertoclient... testing
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remoteEventBLUEWON = ReplicatedStorage:WaitForChild("RemoteEventBlueWon")
+local remoteEventREDWON = ReplicatedStorage:WaitForChild("RemoteEventRedWon")
+local remoteEventDRAW = ReplicatedStorage:WaitForChild("RemoteEventDraw")
+---------
+---------
+local countdownGUI = script.Parent
+---------
+--2min 49secs length of song
+mins= 2
+secs= 49
+---------
+--modular function (not used)
+--local fun_redpoints = require(script.Parent.MyFunctions)
+---------
+local function timing ()
+	local i = 1
+	
+	while i==1 do
+		if  mins ==0 and secs ==0 then     --END GAME
+			print ("That's it!")
+			print ("Blue has score".._G.bluescore)
+			print ("Red has score".._G.redscore)
+			print ("TIME UP!")
+			_G.textString="TIME UP!"
+			countdownGUI.Text= _G.textString
+			i=2	
+			--BLUE WINS TRIGGER EVENT
+			
+			
+			if _G.bluescore > _G.redscore then
+				print ("Blue wins!")
+				remoteEventBLUEWON:FireAllClients()
+				
+				
+			--RED WINS TRIGGER EVENT
+			elseif _G.redscore > _G.bluescore then
+				print ("Red wins!")
+				remoteEventREDWON:FireAllClients()
+				
+				
+			--DRAW WINS TRIGGER EVENT
+			elseif _G.redscore == _G.bluescore then
+				print ("DRAW!")
+				remoteEventDRAW:FireAllClients()
+			end
+			
+			
+		elseif mins >=1 or secs >=1 then   --COUNT DOWN
+			secs = secs - 1
+				if secs==-1 then
+					secs=59
+					mins=mins-1
+				end
+			print ("Min: " .. mins .."Min: ".. secs)
+			_G.textString= mins ..":".. secs
+			countdownGUI.Text= _G.textString
+			wait(1.0)
+			
+		end
+
+	end
+end
+
+
+timing ()
+
+--textString="testing bitch"
+countdownGUI.Text= textString
+

@@ -1,0 +1,16 @@
+
+local steps = script.Parent:GetDescendants()
+
+------
+--The floor steps naming
+local stepcounter = 0
+for k,v in pairs (steps) do
+	local v_convert_string =tostring(v)
+	local k_convert_string =tostring(k)
+--naming the tiles
+	if v:IsA("BasePart") then
+		stepcounter = stepcounter+ 1
+		local naming = "step" .. stepcounter
+		v.Name = naming
+	end	
+end

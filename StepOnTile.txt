@@ -1,0 +1,107 @@
+--name in roblox: Step Script
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--tile ownership key:0=non   1=blue team   2=red team
+local tile_ownership = 0
+--------------------------------------
+--------------------------------------
+local tile = script.Parent	
+local lower_by = Vector3.new(0,-0.2,0) --for lowering the tile when stepped on
+local bd=true
+--------------------------------------
+local Players = game:GetService("Players")
+local sound = game.Workspace.Button6 
+--------------------------------------
+--------testing
+_G.redscore=0
+_G.bluescore=0
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--start random colour tile  
+tile.BrickColor=BrickColor.Random()
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--add_fing_score(char) passes the player name (troytomus)
+local function add_fing_score(char)
+	local player = Players:GetPlayerFromCharacter(char)
+	local leaderstats = player.leaderstats
+	local teamcolorshit = player.TeamColor 
+	local teamcolorshit= tostring(teamcolorshit)
+	
+--BLUE TEAM CHECK
+		if teamcolorshit== "Medium blue" and tile_ownership ~= 1 then
+			tile_ownership= 1	
+--brick colour BLUE
+			tile.BrickColor=BrickColor.Blue()
+--SCORE ADD BLUE
+			local Tiles = leaderstats and leaderstats:FindFirstChild("Tiles Scored")
+			if Tiles then
+				Tiles.Value = Tiles.Value + 1
+				_G.bluescore=_G.bluescore + 1
+			end	
+--RED TEAM CHECK					
+		elseif teamcolorshit== "Really red" and tile_ownership ~= 2 then
+			tile_ownership= 2
+--brick colour RED
+			tile.BrickColor=BrickColor.Red() 
+--SCORE ADD RED
+			local Tiles = leaderstats and leaderstats:FindFirstChild("Tiles Scored")
+			if Tiles then
+				Tiles.Value = Tiles.Value + 1
+				_G.redscore=_G.redscore + 1
+			end	
+		else	
+		end
+end
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--lower the tile
+local function lowertile()
+	
+	--vir=false
+	--print (vir)
+	if bd then
+		bd=false
+		local pos = tile.Position
+		tile.Position = pos + lower_by
+		sound: Play()
+		wait (0.5)
+		tile.Position = pos 
+		wait (0.5)
+		bd=true
+	end		
+end
+--------------------------------------
+--------------------------------------
+--------------------------------------
+-----
+--who is touching me
+local function tiletouched (hitter)
+		
+--call function 
+	lowertile()
+		
+	local char = hitter.Parent
+	local hum= char:FindFirstChild ("Humanoid")
+		
+--IF it's a player!
+		if hum then
+			add_fing_score(char)						
+			else
+		end	
+end
+--------------------------------------
+--------------------------------------
+--------------------------------------
+--waiting to be touched
+
+tile.Touched:Connect(tiletouched)
+
+
+
+
+
